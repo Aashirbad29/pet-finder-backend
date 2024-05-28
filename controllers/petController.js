@@ -48,11 +48,14 @@ const getAll = async (req, res) => {
 
 const remove = async (req, res) => {
   const { id } = req.params;
-  const result = await Pet.findByIdAndDelete(id);
+
+  const result = await Pet.findById(id);
 
   if (!result) {
     return res.status(StatusCodes.NOT_FOUND).json({ message: "Pet not found" });
   }
+
+  await result.remove();
 
   res.status(StatusCodes.OK).json({ message: "Pet deleted successfully" });
 };
