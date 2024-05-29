@@ -15,6 +15,7 @@ const connectDB = require("./db/connect");
 const authRouter = require("./routes/authRoutes");
 const petRouter = require("./routes/petRoutes");
 const adoptionRouter = require("./routes/adoptionRoutes");
+const rescueRoutes = require("./routes/rescueRoutes");
 
 // middleware
 const notFoundMiddleware = require("./middleware/not-found");
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 app.use("/api", authRouter);
 app.use("/api/pet", petRouter);
 app.use("/api/adoption", adoptionRouter);
+app.use("/api/rescues", rescueRoutes);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

@@ -5,7 +5,7 @@ const PetSchema = mongoose.Schema(
     species: {
       type: String,
       required: [true, "Please provide species type"],
-      enum: ["dog", "cat"],
+      enum: ["dog", "cat", "other animals"],
     },
     breed: {
       type: String,
@@ -40,6 +40,10 @@ const PetSchema = mongoose.Schema(
     adopted_by: {
       type: mongoose.Types.ObjectId,
       ref: "User",
+    },
+    is_rescued: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
