@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const PetSchema = mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: [true, "Please provide pet name"],
+    },
     species: {
       type: String,
       required: [true, "Please provide species type"],

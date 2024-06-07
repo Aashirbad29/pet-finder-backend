@@ -2,9 +2,10 @@ const { StatusCodes } = require("http-status-codes");
 const Pet = require("../models/Pet");
 
 const create = async (req, res) => {
-  const { species, breed, age, gender, description, vaccination_status, photo } = req.body;
+  const { name, species, breed, age, gender, description, vaccination_status, photo } = req.body;
 
   const result = await Pet.create({
+    name,
     species,
     breed,
     age,
@@ -19,11 +20,11 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   const { id } = req.params;
-  const { species, breed, age, gender, description, vaccination_status, photo } = req.body;
+  const { name, species, breed, age, gender, description, vaccination_status, photo } = req.body;
 
   const result = await Pet.findByIdAndUpdate(
     id,
-    { species, breed, age, gender, description, vaccination_status, photo },
+    { name, species, breed, age, gender, description, vaccination_status, photo },
     { new: true, runValidators: true }
   );
 
