@@ -2,6 +2,8 @@ const { StatusCodes } = require("http-status-codes");
 const Pet = require("../models/Pet");
 
 const create = async (req, res) => {
+  console.log(req.file);
+
   const { name, species, breed, age, gender, description, vaccination_status, photo } = req.body;
 
   const result = await Pet.create({
@@ -61,4 +63,14 @@ const remove = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: "Pet deleted successfully" });
 };
 
-module.exports = { create, getAll, get, update, remove };
+const uploadPhoto = async (req, res) => {
+  if (!req.file) {
+    return res.status(StatusCodes.BAD_REQUEST).json({ message: "No file uploaded" });
+  }
+
+  const photoPath = req.file.path;
+
+  res.status(StatusCodes.OK).json({ photo: photoPath });
+};
+
+module.exports = { create, getAll, get, update, remove, uploadPhoto };

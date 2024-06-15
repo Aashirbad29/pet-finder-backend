@@ -8,6 +8,7 @@ const createRescue = async (req, res) => {
   const result = await Rescue.create({
     user_id: req.user.userId,
     pet_details,
+    request_date: new Date(),
   });
 
   res.status(StatusCodes.CREATED).json({ result });
@@ -46,7 +47,7 @@ const approveRejectRescue = async (req, res) => {
     throw new CustomError.NotFoundError("Rescue request not found");
   }
 
-  const result = await Rescue.findOneAndUpdate({ _id: id }, { status: status }, { new: true });
+  const result = await Rescue.findOneAndUpdate({ _id: id }, { status, response_date: new Date() }, { new: true });
 
   res.status(StatusCodes.OK).json({ result });
 };

@@ -4,6 +4,7 @@ require("express-async-errors");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 
 // packages
 const morgan = require("morgan");
@@ -28,6 +29,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Home page");
 });
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/api", authRouter);
 app.use("/api/pet", petRouter);

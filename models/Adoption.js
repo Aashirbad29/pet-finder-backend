@@ -14,7 +14,10 @@ const AdoptionSchema = mongoose.Schema(
     },
     request_date: {
       type: Date,
-      default: new Date(),
+      default: Date.now,
+    },
+    response_date: {
+      type: Date,
     },
     status: {
       type: Boolean,

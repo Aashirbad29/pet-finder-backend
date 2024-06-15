@@ -16,6 +16,13 @@ const RescueSchema = new mongoose.Schema(
       enum: ["Pending", "Approved", "Rejected"],
       default: "Pending",
     },
+    request_date: {
+      type: Date,
+      default: Date.now,
+    },
+    response_date: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

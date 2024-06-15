@@ -15,6 +15,7 @@ const create = async (req, res) => {
   const result = await Adoption.create({
     user_id: req.user.userId,
     pet_id,
+    request_date: new Date(),
   });
 
   res.status(StatusCodes.CREATED).json({ result });
@@ -52,7 +53,7 @@ const approveRejectRequest = async (req, res) => {
     throw new CustomError.BadRequestError("Pet is already adopted");
   }
 
-  const result = await Adoption.findOneAndUpdate({ _id: id }, { status: status }, { new: true });
+  const result = await Adoption.findOneAndUpdate({ _id: id }, { status: status, response_date: new Date() }, { new: true });
 
   if (result) {
     await Pet.findOneAndUpdate({ _id: result.pet_id }, { is_adopted: result.status });
